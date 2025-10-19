@@ -4,6 +4,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import time
+import requests
 # webInterface.py はユーザーのカスタムモジュールと仮定
 from webInterface import WebInterface 
 # ↓↓↓ エラー処理が変更になるため、これもインポート ↓↓↓
@@ -32,7 +33,29 @@ class SoraVideo:
         create_button = self.driver.find_element(By.CSS_SELECTOR, "button[data-state='closed'][data-disabled='false']")
         create_button.click()
         print("動画作成ボタンをクリックしました。動画が生成されるまでお待ちください...")
-        # 動画生成の完了を待つ（適切な条件に変更する必要があります）
+    def save_video_latest(self):
+        url = "https://sora.chatgpt.com/drafts"
+        self.driver.get(url)
+        time.sleep(5)
+        video_latest = self.driver.find_elements(By.CSS_SELECTOR, "video")[0]
+        src = video_latest.get_attribute("src")
+
+        time.sleep(2)
+        # ---- 動画をダウンロード ----
+        file_name = "latest_video.mp4"
+        print("Downloading video...")
+
+        response = requests.get(src, stream=True)
+        response.raise_for_status()
+
+        with open(file_name, "wb") as f:
+            for chunk in response.iter_content(chunk_size=8192):
+                if chunk:
+                    f.write(chunk)
+        print(f"✅ 動画を保存しました: {file_name}")
+
+    def save_video():
+        pass
     def _select_image(self):
         if not self.image_url:
             return

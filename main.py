@@ -16,8 +16,9 @@ from SoraVideo import SoraVideo
 
 #初期化
 WebInterface.connect()
-SoraVideo = SoraVideo("男性が公園でジョギングをしている動画。背景には青空と緑の木々が広がり、爽やかな雰囲気が漂っています。", 15).create_video()
-
+SoraVideo = SoraVideo("男性が公園でジョギングをしている動画。背景には青空と緑の木々が広がり、爽やかな雰囲気が漂っています。", 15)
+# SoraVideo.create_video()
+SoraVideo.save_video_latest()
 # youtubeVideoUpload = YoutubeVideoUpload("C:/Users/newmi/Videos/douga.mp4", "C:/Users/newmi/Pictures/AJ.png",
 #                                          "タイトルテスト", "説明文テスト", publish_type="public")
 # youtubeVideoUpload.upload_video()

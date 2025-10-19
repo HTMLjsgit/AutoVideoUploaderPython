@@ -1,0 +1,3 @@
+以下のコマンドを実行し、chromeを立ち上げた後、のちにpythonからport接続することで、
+googleログインした状態での操作が可能
+& "C:\Program Files\Google\Chrome\Application\chrome.exe" --remote-debugging-port=9222 --user-data-dir="C:\Users\newmi\AppData\Local\Google\Chrome\Selenium" --profile-directory="Default" --no-sandbox --remote-allow-origins=*
